@@ -17,16 +17,14 @@ const getPriorityIcon = (priority) => {
 const getStatusIcon = (status) => {
   const statusIcons = {
     'Todo': faCheckCircle,
-    'In progress': faSpinner, // Assuming 'In Progress' can use the same icon, or choose a different one
+    'In progress': faSpinner,
     'Backlog': faCircleNotch,
-    // Add more statuses and their corresponding icons as needed
   };
-  return statusIcons[status] || faCircleNotch; // Default icon if status is not found
+  return statusIcons[status] || faCircleNotch;
 };
 
 
 const TaskCard = ({ task }) => {
-  //const hasFeatureRequest = task.tag.includes('Feature request');
     return (
       <div className="task-card">
         <div className="task-title">
@@ -36,7 +34,6 @@ const TaskCard = ({ task }) => {
         <p className="task-id">ID: {task.id}</p>
         <FontAwesomeIcon icon={getPriorityIcon(task.priority)} className={`priority-icon priority-${task.priority}`} />
         <span className="feature-request-tag">Feature Request</span>
-        {/* More details or controls for each task */}
       </div>
     );
   };

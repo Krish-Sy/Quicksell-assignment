@@ -1,6 +1,14 @@
 import React from 'react';
 import TaskCard from './TaskCard';
 
+const priorityLabels = {
+  '4': 'Urgent',
+  '3': 'High',
+  '2': 'Medium',
+  '1': 'Low',
+  '0': 'No priority'
+};
+
 const groupTasks = (tasks, users, grouping) => {
   switch (grouping) {
     case 'status':
@@ -14,26 +22,25 @@ const groupTasks = (tasks, users, grouping) => {
         (acc[userName] = acc[userName] || []).push(task);
         return acc;
       }, {});
-    case 'priority':
-      return tasks.reduce((acc, task) => {
-        const priority = `Priority ${task.priority}`;
-        (acc[priority] = acc[priority] || []).push(task);
-        return acc;
-      }, {});
+      case 'priority':
+        return tasks.reduce((acc, task) => {
+          const priorityLabel = priorityLabels[task.priority.toString()] || `Priority ${task.priority}`;
+          (acc[priorityLabel] = acc[priorityLabel] || []).push(task);
+          return acc;
+        }, {});
     default:
       return {};
   }
 };
 
 const sortTasks = (tasks, ordering) => {
-    // Create a copy of the tasks array to avoid mutating the original state
     const tasksCopy = [...tasks];
     return tasksCopy.sort((a, b) => {
       if (ordering === 'priority') {
-        // Sort by priority, descending
+        // Sorting by priority, descending
         return b.priority - a.priority;
       } else {
-        // Sort by title, ascending
+        // Sorting by title, ascending
         return a.title.localeCompare(b.title);
       }
     });
@@ -46,11 +53,10 @@ const sortTasks = (tasks, ordering) => {
       return acc;
     }, {});
   
-    // Render the sorted and grouped tasks
     const renderGroupedTasks = () => {
         return Object.keys(sortedGroupedTasks).map((group) => (
           <div key={group} className="task-group-column">
-            <h3>{group}</h3>
+            <h3 className='card-title'>{group}</h3>
             {sortedGroupedTasks[group].map(task => (
               <TaskCard key={task.id} task={task} />
             ))}

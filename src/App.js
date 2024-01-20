@@ -17,12 +17,10 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-    // Effect to persist grouping state to local storage
   useEffect(() => {
     localStorage.setItem('grouping', grouping);
   }, [grouping]);
 
-  // Effect to persist ordering state to local storage
   useEffect(() => {
     localStorage.setItem('ordering', ordering);
   }, [ordering]);
@@ -32,7 +30,7 @@ const App = () => {
       try {
         const response = await fetch('https://api.quicksell.co/v1/internal/frontend-assignment');
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Fault with the network api');
         }
         const data = await response.json();
         setTasks(data.tickets);
