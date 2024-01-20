@@ -85,7 +85,8 @@ html, body {
 
 .task-card .task-title {
   display: flex; 
-  align-items: center; 
+  align-items: flex-start;
+  justify-content: space-between; 
   gap: 0.5em; 
 }
 .profile-icon{
