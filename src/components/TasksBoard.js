@@ -47,6 +47,11 @@ const sortTasks = (tasks, ordering) => {
   };
 
   const TasksBoard = ({ tasks, users, grouping, ordering }) => {
+
+    const getUserForTask = (userId) => {
+      return users.find(user => user.id === userId);
+    };
+
     const groupedTasks = groupTasks(tasks, users, grouping);
     const sortedGroupedTasks = Object.entries(groupedTasks).reduce((acc, [group, tasks]) => {
       acc[group] = sortTasks(tasks, ordering);
@@ -57,9 +62,10 @@ const sortTasks = (tasks, ordering) => {
         return Object.keys(sortedGroupedTasks).map((group) => (
           <div key={group} className="task-group-column">
             <h3 className='card-title'>{group}</h3>
-            {sortedGroupedTasks[group].map(task => (
-              <TaskCard key={task.id} task={task} />
-            ))}
+          {sortedGroupedTasks[group].map(task => {
+          const user = getUserForTask(task.userId); // Retrieve the user data for the task
+          return <TaskCard key={task.id} task={task} user={user} />; // Pass the user data to the TaskCard
+        })}
           </div>
         ));
       };

@@ -55,6 +55,7 @@ const App = () => {
 
   return (
     <div className="App">
+    <div className='AppContainer'>
       <Header 
         grouping={grouping} 
         onGroupingChange={setGrouping} 
@@ -67,6 +68,7 @@ const App = () => {
         grouping={grouping} 
         ordering={ordering}
       />
+    </div>
     </div>
   );
 };
