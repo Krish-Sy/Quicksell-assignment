@@ -1,38 +1,131 @@
-.App {
-  text-align: center;
+/* App.css */
+.header {
+  padding: 16px;
+  background-color: #f8f9fa; /* Light grey background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-bottom: 1px solid #e1e1e1; /* Light border for separation from content */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header > div {
+  margin: 0 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header label {
+  margin-right: 8px;
+  font-weight: bold;
+  color: #333; /* Dark grey color for text for better readability */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header .dropdown select,
+.header select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: white;
+  cursor: pointer;
+}
+
+.header select:hover,
+.header select:focus {
+  border-color: #80bdff;
+  outline: none;
+}
+
+.tasks-board {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  overflow-x: auto; /* Allows horizontal scrolling on large screens */
+  padding: 16px;
+  gap: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+.task-group-column {
+  flex: 0 0 auto; /* Prevents the columns from shrinking */
+  width: 20%; /* Set a base width for each column */
+  min-width: 200px; /* Minimum width for each column */
+  background-color: #f8f9fa;
+  margin: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Rest of your styles for .task-group-column */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.task-card {
+  background: #fff; /* White background for each task card */
+  margin-bottom: 8px; /* Space between cards */
+  padding: 8px; /* Padding inside each card */
+  border-radius: 4px; /* Rounded corners for cards */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Shadow for cards */
+}
+
+.task-card .task-id {
+  color: grey; /* Grey color for the task ID */
+  font-size: 0.8em; /* Smaller font size for the ID */
+  margin-top: 0; /* Remove any default top margin */
+  margin-bottom: 0.5em; /* Space before the task title */
+}
+
+.task-card .task-title {
+  display: flex; /* Aligns children (icon and title) in a row */
+  align-items: center; /* Centers the icon and title vertically */
+  gap: 0.5em; /* Adds some space between the icon and the title */
+}
+
+.task-card .task-title h4 {
+  margin: 0; /* Removes default margin from the title */
+  /* Add any additional title styling here */
+}
+
+.task-card .task-id {
+  color: grey;
+  font-size: 0.8em;
+  margin-top: 0.5em; /* Provides space between the ID and the title */
+}
+
+.priority-icon {
+  margin-right: 0.5em; /* Space between the icon and the title */
+}
+
+.priority-4 { color: red; }
+.priority-3 { color: orange; }
+.priority-2 { color: yellow; }
+.priority-1 { color: green; }
+.priority-0 { color: grey; }
+
+.feature-request-tag {
+  background-color: #eee; /* Light grey background */
+  color: #333; /* Dark text for readability */
+  border-radius: 12px; /* Rounded corners */
+  padding: 3px 6px; /* Padding inside the tag */
+  font-size: 0.75em; /* Smaller font size */
+  margin-left: 10px; /* Space between the title and the feature request tag */
+  white-space: nowrap; /* Prevents the tag from wrapping */
+}
+
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1200px) {
+  .task-group-column {
+    flex: 0 0 calc(25% - 16px); /* Adjust column width for fewer columns on smaller screens */
   }
 }
+
+@media (max-width: 768px) {
+  .tasks-board {
+    flex-direction: column;
+    overflow-x: hidden; /* No horizontal scrolling on mobile */
+  }
+
+  .task-group-column {
+    width: 100%; /* Each column takes full width on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .task-group-column {
+    flex: 0 0 100%; /* Stack columns on top of each other on the smallest screens */
+  }
+}
+
+
+
